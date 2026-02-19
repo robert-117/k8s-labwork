@@ -10,3 +10,20 @@ Practicing hands-on building and deployment
 4) implement deployment via terraform + EKS
 
 All plans include manifests and documentation
+
+## Initial steps for setup using Ubuntu
+#### Install kind
+```
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/latest/kind-linux-amd64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/kind
+```
+#### Install kubectl
+```
+sudo apt-get update
+sudo apt-get install -y kubectl
+```
+#### Creating local k8s cluster
+```
+kind create cluster --name k8s-lab
+```
