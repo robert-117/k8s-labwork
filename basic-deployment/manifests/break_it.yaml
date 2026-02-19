@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+  labels:
+    app: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+        - name: webapp
+          image: busybox
+          command: [ "sh", "-c", "sleep 10 && exit 1" ]
+          ports:
+            - containerPort: 80
+          env:
+          - name: WELCOME_MESSAGE
+            valueFrom:
+              configMapKeyRef:
+                name: webapp-config
+                key: WELCOME_MESSAGE
+          - name: API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: webapp-secret
+                key: API_KEY
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests: # intentionally small
+              memory: "16Mi"
+              cpu: "50m"
+            limits: # intentionally small
+              memory: "32Mi"
+              cpu: "100m"
