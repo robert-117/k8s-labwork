@@ -2,7 +2,7 @@
 
 Practicing hands-on building and deployment
 
-# Plan
+## Plan
 
 1) local cluster, deploy app, service exposure, scaling, configurations
 2) implement  observability
