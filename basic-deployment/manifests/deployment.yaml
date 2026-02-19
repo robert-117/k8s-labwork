@@ -19,4 +19,33 @@ spec:
           image: nginx:latest
           ports:
             - containerPort: 80
-
+          env:
+          - name: WELCOME_MESSAGE
+            valueFrom:
+              configMapKeyRef:
+                name: webapp-config
+                key: WELCOME_MESSAGE
+          - name: API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: webapp-secret
+                key: API_KEY
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests: # minimum needed
+              memory: "64Mi"
+              cpu: "100m"
+            limits: # maximum allowed
+              memory: "128Mi"
+              cpu: "250m"

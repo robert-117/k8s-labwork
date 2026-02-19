@@ -13,3 +13,9 @@
 - `kubectl port-forward service/web 8080:80`
 - `kubectl scale deployment webapp --replicas=3`
 - `kubectl delete pod <pod_name>`
+
+## Additional concepts
+- namespace isolation
+- ConfigMaps and Secret injection
+- Liveness vs Readiness probes
+- Resource requests and limits
