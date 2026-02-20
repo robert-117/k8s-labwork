@@ -4,8 +4,8 @@ Practicing hands-on building and deployment
 
 ## Plan
 
-1) local cluster, deploy app, service exposure, scaling, configurations
-2) implement observability
+1) [local cluster, deploy app, service exposure, scaling, configurations](https://github.com/robert-117/k8s-labwork/blob/main/basic-deployment/README.md)
+2) [implement observability](https://github.com/robert-117/k8s-labwork/blob/main/observability/README.md)
 3) autoscaling + load testing
 4) implement deployment via terraform + EKS
 
