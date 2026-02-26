@@ -4,8 +4,6 @@
 Deploy pods and double-check metrics server is deploy
 - `kubectl apply -n ns1 -f manifests/deployment.yaml`
 - `kubectl top pods -n ns1`
-
-## What I did
 ### Generate CPU load to deployment with autoscaling configured
 - `kubectl autoscale deployment webapp -n ns1 --cpu=50% --min=1 --max=10`
 - exec'd into pod and ran loop to generate cpu load
@@ -25,3 +23,9 @@ webapp   Deployment/webapp   cpu: 46%/50%    1         10        5          3d
 ```
 - double-check details from scaling
   - `kubectl describe deployment -n ns1 webapp`
+
+## What I did
+- CPU-based HPA scales on utilization relative to requests
+- low CPU requests can cause overly sensitive scaling and poor scheduling assumptions
+- CPU HPA won’t help network-bound or dependency-bound workloads
+- scaling lags due to scrape/evaluation intervals, pod startup time, and cluster capacity
